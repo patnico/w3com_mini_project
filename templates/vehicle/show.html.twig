@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Véhicule{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <h1>Véhicule</h1>
+
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Immatriculation</th>
+                <td>{{ vehicle.registration }}</td>
+            </tr>
+            <tr>
+                <th>Marque</th>
+                <td>{{ vehicle.brand }}</td>
+            </tr>
+            <tr>
+                <th>Modèle</th>
+                <td>{{ vehicle.model }}</td>
+            </tr>
+            <tr>
+                <th>Couleur</th>
+                <td>{{ vehicle.color }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <b>Equipements</b>
+        {% if vehicle.customEquipments|length > 0 %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nom court</th>
+                    <th>Nom long</th>
+                    <th>Poids</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for equipment in vehicle.customEquipments %}
+                    <tr>
+                        <td>{{ equipment.shortName }}</td>
+                        <td>{{ equipment.longName }}</td>
+                        <td>{{ equipment.weight }}</td>
+                        <td>
+                            <a href="{{ path('equipment_show', {'id': equipment.id}) }}"
+                               class="btn btn-light">Détail</a>
+                            <a href="{{ path('equipment_edit', {'id': equipment.id}) }}"
+                               class="btn btn-light">Modifier</a>
+                            <a href="{{ path('equipment_delete', {'id': equipment.id}) }}" class="btn btn-light"
+                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div>Aucun équipement trouvé</div>
+        {% endif %}
+
+        <a href="{{ path('vehicle_index') }}" class="btn btn-light">Retour à la liste</a>
+        <a href="{{ path('vehicle_edit', {'id': vehicle.id}) }}" class="btn btn-light">Modifier</a>
+
+    </div>
+{% endblock %}

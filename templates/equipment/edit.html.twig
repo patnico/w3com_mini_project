@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un équipement{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <h1>Modifier un équipement</h1>
+
+        {{ include('equipment/_form.html.twig', {'button_label': 'Valider'}) }}
+
+        <a href="{{ path('equipment_index') }}" class="btn btn-light">Retour à la liste</a>
+
+    </div>
+{% endblock %}

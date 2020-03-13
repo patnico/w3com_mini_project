@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau véhicule{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <h1>Ajouter un véhicule</h1>
+
+        {{ include('vehicle/_form.html.twig') }}
+
+        <a href="{{ path('vehicle_index') }}" class="btn btn-light">Retour à la liste</a>
+
+    </div>
+{% endblock %}

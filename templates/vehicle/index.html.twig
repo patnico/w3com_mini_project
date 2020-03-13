@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des véhicules{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <h1>Liste des véhicules</h1>
+        <a href="{{ path('equipment_index') }}" class="btn btn-light">Parcourir les équipements</a>
+
+        {% if vehicles|length > 0 %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Immatriculation</th>
+                    <th>Marque</th>
+                    <th>Modèle</th>
+                    <th>Couleur</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for vehicle in vehicles %}
+                    <tr>
+                        <td>{{ vehicle.registration }}</td>
+                        <td>{{ vehicle.brand }}</td>
+                        <td>{{ vehicle.model }}</td>
+                        <td>{{ vehicle.color }}</td>
+                        <td>
+                            <a href="{{ path('vehicle_show', {'id': vehicle.id}) }}" class="btn btn-light">Détail</a>
+                            <a href="{{ path('vehicle_edit', {'id': vehicle.id}) }}" class="btn btn-light">Modifier</a>
+                            <a href="{{ path('vehicle_delete', {'id': vehicle.id}) }}" class="btn btn-light"
+                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div>Aucun véhicule trouvé</div>
+        {% endif %}
+
+        <a href="{{ path('vehicle_new') }}" class="btn btn-light">Ajouter un véhicule</a>
+
+    </div>
+{% endblock %}

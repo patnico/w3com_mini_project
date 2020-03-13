@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des équipements{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <h1>Liste des équipements</h1>
+        <a href="{{ path('vehicle_index') }}" class="btn btn-light">Parcourir les véhicules</a>
+
+        {% if equipments|length > 0 %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nom court</th>
+                    <th>Nom long</th>
+                    <th>Poids</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for equipment in equipments %}
+                    <tr>
+                        <td>{{ equipment.shortName }}</td>
+                        <td>{{ equipment.longName }}</td>
+                        <td>{{ equipment.weight }}</td>
+                        <td>
+                            <a href="{{ path('equipment_show', {'id': equipment.id}) }}" class="btn btn-light">Détail</a>
+                            <a href="{{ path('equipment_edit', {'id': equipment.id}) }}" class="btn btn-light">Modifier</a>
+                            <a href="{{ path('equipment_delete', {'id': equipment.id}) }}" class="btn btn-light"
+                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div>Aucun équipement trouvé</div>
+        {% endif %}
+
+        <a href="{{ path('equipment_new') }}" class="btn btn-light">Ajouter un équipment</a>
+
+    </div>
+{% endblock %}
