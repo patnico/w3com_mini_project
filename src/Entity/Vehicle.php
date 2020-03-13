@@ -51,7 +51,7 @@ class Vehicle
     /**
      * @var CustomEquipment[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\CustomEquipment", mappedBy="vehicle")
+     * @ORM\OneToMany(targetEntity="App\Entity\CustomEquipment", mappedBy="vehicle", orphanRemoval=true)
      */
     private $customEquipments;
 
@@ -188,6 +188,20 @@ class Vehicle
                 $customEquipment->setVehicle(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @param Equipment $equipment
+     *
+     * @return $this
+     */
+    public function addEquipment(Equipment $equipment): self
+    {
+        $customEquipment = new CustomEquipment();
+        $customEquipment->setEquipment($equipment);
+        $this->addCustomEquipment($customEquipment);
 
         return $this;
     }
