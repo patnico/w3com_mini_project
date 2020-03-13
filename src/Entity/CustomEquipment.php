@@ -98,6 +98,14 @@ class CustomEquipment
     }
 
     /**
+     * @return string|null
+     */
+    public function getShortName(): ?string
+    {
+        return $this->equipment->getShortName();
+    }
+
+    /**
      * Will return default equipment long name if no custom name is set
      *
      * @return string|null
