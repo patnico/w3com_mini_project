@@ -21,7 +21,9 @@ class VehicleType extends AbstractType
             ->add('custom_equipments', EntityType::class, array(
                 'class' => Equipment::class,
                 'choice_label' => 'longName',
-                'multiple' => true
+                'multiple' => true,
+                'mapped' => false
+                // TODO: use Vehicle addEquipment method to create custom equipments
             ));
     }
 
